@@ -1,3 +1,4 @@
+Aula 1
 Revisão: -Decomposição Espectral; Auto Valores e Auto Vetores; Polinômio Característico                                          
 Distância de Mahalanobis
 Análise Dicriminantes
@@ -5,3 +6,8 @@ Referência: Applied Multivarie Statistical Analysis (167,471);
             Métodos Estatísticos Multivariados;
             Estatítica Multivariada (Daniel Furtado, 339);
             Análise de Dados através de métodos de estatística multivariada (Sueli Aparecida)
+Aula 2
+Matriz de Dados(X): X(nxp) - Organiza todas as informações(mensurações) de todos os elemnetos(n) em todas as variáveis(p).
+De forma que: - k=1,2,...,p(variáveis)
+              - j=1,2,...,n(indivíduos)
+X(jk): É a mensuração da variável k no elemento j
