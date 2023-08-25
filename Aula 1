@@ -18,3 +18,6 @@ Decomposição Spectral da matriz de dispersão S
 A decomposição de uma matriz pemite a apresentação da mesma através da representação de seus autovalores e autovetores, (λ1, e1), (λ2, e2)
 ..., (λp, ep). Considere S(pxp) uma matriz pósitiva definida (p-d), de forma que λ1 ≧ λ2 ≧ ... ≧  λp > 0. sendo λk > 0, ∀ k = 1,2,...,p
 Associado a λk tem-se o respectivo autovetor, dado por ek ≠ 0. A D-S de S(pxp) é definida por: S = [e1, λ1(e1)^trans] + ... [ep, λp(ep)^trans]
+
+Seminário:
+-https://read.oecd-ilibrary.org/economics/handbook-on-residential-property-price-indices_9789264197183-en#page167 (HANDBOOK)
