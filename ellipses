@@ -1,0 +1,28 @@
+rm(list = ls())
+install.packages("MVQuickGraphs")
+library(MVQuickGraphs)
+library(ggplot2)
+
+dataset = bancodedados
+confidenceEllipse(mean(dataset), eigen(var(dataset)),
+                  n=row(dataset), p=ncol(dataset))
+###
+dados =USArrests
+View(dados)
+n=nrow(USArrests)
+p=2
+elipse = ellipse(var(dados), scale =c(1,1),
+        centre = c(mean(dados[,1]), mean(dados[,2])),
+        level = 0.95,
+        t= sqrt(qf(0.05,p,(n-p))*(n-1)*p/(n-p)))
+
+plot(elipse(0.8), type ="l")
+
+## GGPLOT 2 ##
+ggplot(dados, aes(dados$Murder, dados$Assault)) +
+        
+         geom_point(colour = "black") +
+         stat_ellipse(type = 't', level = 0.95, colour = "blue") +
+         stat_ellipse(type = 't', level = 0.90, colour ="gold") +
+         stat_ellipse(type = 't', level = 0.975, colour = "red") +
+         theme(panel.background = element_rect(fill = 'lightblue', color = 'black'))
