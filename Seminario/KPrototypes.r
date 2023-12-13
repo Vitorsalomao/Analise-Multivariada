@@ -1,11 +1,10 @@
 rm(list = ls())
 
-install.packages('clustMixType') # K-PROTOTYPE CLUSTERING
-
 library(dplyr)
 library(cluster)
 library(clustMixType)
-
+library(writexl)
+library(ggplot2)
 dados = read.csv("C:/Users/vitor/Documents/UFC/Multivariada/Seminário/saopaulo.csv")
 
 dados <- dados %>%
@@ -20,8 +19,8 @@ dados <- dados %>%
 dados <- dados %>%
   select(1:11, 15, 12:14)
 
-dados <- dados[sample(nrow(dados)), ] #RANDONIZANDO AS LINHAS
-dados <- dados[1:100,] # SELECIONANDO APENAS AS 1000 PRIMEIRAS LINHAS, EVITANDO ALTO PROCESSAMENTO
+set.seed(15011998);dados <- dados[sample(nrow(dados)), ] #RANDONIZANDO AS LINHAS
+dados <- dados[1:10000,] # SELECIONANDO APENAS AS 1000 PRIMEIRAS LINHAS, EVITANDO ALTO PROCESSAMENTO
 gower_dist <- daisy(dados[, -13:-15],
                     metric = "gower",
                     type = )
@@ -77,17 +76,23 @@ val_cindex$indices
 val_silhouette$k_opt
 val_silhouette$indices
 
+View(dados)
+
 
 #GRÁFICO DE DECISÃO DO MELHOR NÚMERO DE CLUSTERS
 plot(3:10,val_silhouette$indices,
-     xlab = "Number of clusters",
-     ylab = "Silhouette Width");lines(3:10, val_silhouette$indices);points(val_silhouette$k_opt,
+     xlab = "Número de clusters",
+     ylab = "Silhouette Amplitude");lines(3:10, val_silhouette$indices);points(val_silhouette$k_opt,
                                            val_silhouette$indices[val_silhouette$k_opt - 2],
-                                           col = "green", pch = 16);text(val_silhouette$k_opt,
+                                           col = "blue", pch = 16);text(val_silhouette$k_opt,
                                                                        val_silhouette$indices[val_silhouette$k_opt - 2],
                                                                        labels = paste("Ideal(Silhoueta) =", val_silhouette$k_opt),
                                                                        pos = 1,
-                                                                       col = "green")
+                                                                       col = "blue")
+
+
+
+
 
 plot(3:10,val_cindex$indices,
      xlab = "Number of clusters",
@@ -118,7 +123,7 @@ set.seed(150198);kpt_dunn <- kproto_gower(dados[,-12:-15], val_dunn$k_opt)
 
 
 #ACRESCENTANDO QUAL CLUSTER CADA UM PERTENCE (PELA MEDIDA) NO DATAFRAME
-dados$C_Silhouette <- kpt_silhouette$cluster
+dados$Cluster_Silhouette <- kpt_silhouette$cluster
 dados$C_Dunn <- kpt_dunn$cluster
 dados$C_Cindex <- kpt_cindex$cluster
 
@@ -128,5 +133,9 @@ kpt_silhouette$centers
 kpt_dunn$centers
 kpt_cindex$centers
 
-kpt_dunn$centers[3,]$Condo
-kp
+
+h_complete <- hclust(gower_dist, method = 'complete')
+h_single <- hclust(gower_dist, method = 'single')
+h_average <- hclust(gower_dist, method = 'average')
+
+write.csv(dados,"C:/Users/vitor/Documents/UFC/Multivariada/Seminário/dados.csv")
